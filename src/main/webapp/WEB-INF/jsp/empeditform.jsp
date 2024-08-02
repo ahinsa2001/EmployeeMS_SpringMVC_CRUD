@@ -31,13 +31,30 @@
             backdrop-filter: blur(10px);
         }
         nav .app-name {
-            font-size: 24px;
+            font-size: 21px;
             font-weight: bold;
             margin-left: 15px;
         }
         nav .user-info {
-            font-size: 18px;
+            display: flex;
+            align-items: center;
+            font-size: 16px;
             margin-right: 15px;
+        }
+        nav .user-info button {
+            margin-left: 12px;
+            padding: 5px 10px;
+            font-size: 15px;
+            color: #fff;
+            background-color: #BE3144;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        nav .user-info button:hover {
+            background-color: #F05941;
+            transform: scale(1.05);
         }
         h1 {
             font-size: 2.5em;
@@ -153,7 +170,12 @@
 <body>
 <nav>
     <div class="app-name">EmployeeMS</div>
-    <div class="user-info">Welcome, <%= request.getAttribute("username") %></div>
+    <div class="user-info">
+        Welcome, <%= request.getAttribute("username") %>
+        <form action="logout" method="post" style="margin: 0;">
+            <button type="submit">Logout</button>
+        </form>
+    </div>
 </nav>
 <h1>Edit Employee</h1>
 <div class="form-container">
