@@ -354,11 +354,11 @@
 <div class="form-container">
     <form:form method="post" action="login" modelAttribute="user" onsubmit="return validateLoginForm()">
         <div class="form-group">
-            <form:input path="username" placeholder="Username" id="username" onfocus="clearError(event)"/>
+            <form:input path="username" placeholder="Username" id="username" onfocus="clearError(event)" maxlength="50"/>
             <div id="usernameError" class="error"></div>
         </div>
         <div class="form-group">
-            <form:password path="password" placeholder="Password" id="password" onfocus="clearError(event)"/>
+            <form:password path="password" placeholder="Password" id="password" onfocus="clearError(event)" maxlength="15"/>
             <div id="passwordError" class="error"></div>
         </div>
         <div class="form-group">

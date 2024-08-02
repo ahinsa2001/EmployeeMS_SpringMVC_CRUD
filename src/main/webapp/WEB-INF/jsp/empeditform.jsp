@@ -184,15 +184,15 @@
             <form:hidden path="id" />
         </div>
         <div class="form-group">
-            <form:input path="name" placeholder="Name" />
+            <form:input path="name" placeholder="Name" maxlength="50"/>
             <div id="nameError" class="error"></div>
         </div>
         <div class="form-group">
-            <form:input path="salary" placeholder="Salary" />
+            <form:input path="salary" placeholder="Salary" maxlength="8"/>
             <div id="salaryError" class="error"></div>
         </div>
         <div class="form-group">
-            <form:input path="designation" placeholder="Designation" />
+            <form:input path="designation" placeholder="Designation" maxlength="50"/>
             <div id="designationError" class="error"></div>
         </div>
         <div class="form-group">

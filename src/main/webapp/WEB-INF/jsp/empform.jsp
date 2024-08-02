@@ -185,15 +185,15 @@
 <div class="form-container">
     <form:form method="post" action="save" onsubmit="return validateForm()">
         <div class="form-group">
-            <form:input path="name" placeholder="Name" id="name"/>
+            <form:input path="name" placeholder="Name" id="name" maxlength="50"/>
             <div id="nameError" class="error"></div>
         </div>
         <div class="form-group">
-            <form:input path="salary" placeholder="Salary" id="salary"/>
+            <form:input path="salary" placeholder="Salary" id="salary" maxlength="8"/>
             <div id="salaryError" class="error"></div>
         </div>
         <div class="form-group">
-            <form:input path="designation" placeholder="Designation" id="designation"/>
+            <form:input path="designation" placeholder="Designation" id="designation" maxlength="50"/>
             <div id="designationError" class="error"></div>
         </div>
         <div class="form-group">
