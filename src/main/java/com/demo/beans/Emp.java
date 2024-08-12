@@ -1,11 +1,28 @@
 package com.demo.beans;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "Emp99")
 public class Emp {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private int id;
+
+    @Column(name = "name", nullable = false)
     private String name;
+
+    @Column(name = "salary", nullable = false)
     private float salary;
+
+    @Column(name = "designation", nullable = false)
     private String designation;
+
+    @Column(name = "user_id", nullable = false)
     private int user_id;
+
 
     public int getUser_id() {
         return user_id;

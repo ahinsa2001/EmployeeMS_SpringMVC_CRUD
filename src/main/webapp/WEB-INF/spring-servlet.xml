@@ -3,10 +3,12 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:tx="http://www.springframework.org/schema/tx"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans.xsd
        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
-       http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+       http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
 
     <!-- Enable Spring MVC configuration -->
     <mvc:annotation-driven/>
@@ -21,7 +23,7 @@
         <property name="suffix" value=".jsp" />
     </bean>
 
-    <!-- DataSource and JdbcTemplate beans -->
+    <!-- DataSource -->
     <bean id="ds" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="com.mysql.cj.jdbc.Driver" />
         <property name="url" value="jdbc:mysql://localhost:3306/test" />
@@ -29,8 +31,49 @@
         <property name="password" value="Lk1aAkOm@AN" />
     </bean>
 
-    <bean id="jt" class="org.springframework.jdbc.core.JdbcTemplate">
-        <property name="dataSource" ref="ds" />
+<!--    &lt;!&ndash; JdbcTemplate &ndash;&gt;-->
+<!--    <bean id="jt" class="org.springframework.jdbc.core.JdbcTemplate">-->
+<!--        <property name="dataSource" ref="ds" />-->
+<!--    </bean>-->
+
+    <!-- Multipart Resolver for file uploads -->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="maxUploadSize" value="5000000" /> <!-- Set the maximum upload size (optional) -->
     </bean>
+
+    <!-- Configure static resource handling -->
+    <mvc:resources mapping="/uploads/**" location="file:///F:/test/test/myproject/uploads/" />
+
+    <!-- Hibernate SessionFactory configuration -->
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+        <property name="dataSource" ref="ds"/>
+        <property name="packagesToScan" value="com.demo.beans"/>
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+                <prop key="hibernate.show_sql">true</prop>
+                <prop key="hibernate.hbm2ddl.auto">update</prop>
+            </props>
+        </property>
+    </bean>
+
+    <!-- Transaction Manager -->
+    <bean id="transactionManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <!-- Enable transaction management with @Transactional annotations -->
+    <tx:annotation-driven/>
+
+    <!--Interceptor-->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/> <!--Apply to all paths-->
+            <mvc:exclude-mapping path="/login"/>  <!-- Exclude login page from interception -->
+            <mvc:exclude-mapping path="/register"/>  <!-- Exclude register page from interception -->
+            <bean class="com.demo.interceptors.AuthenticationInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
+
 
 </beans>

@@ -41,6 +41,12 @@
             font-size: 16px;
             margin-right: 15px;
         }
+        nav .user-info img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 12px;
+        }
         nav .user-info button {
             margin-left: 12px;
             padding: 5px 10px;
@@ -175,6 +181,8 @@
 <nav>
     <div class="app-name">EmployeeMS</div>
     <div class="user-info">
+        <%--Profile image of user--%>
+        <img src="<%= request.getAttribute("profileImageUrl") %>" alt="Profile Image">
         Welcome, <%= request.getAttribute("username") %>
         <form action="logout" method="post" style="margin: 0;">
             <button type="submit">Logout</button>
